@@ -26,7 +26,12 @@ def check_resources(user_order):
         if ingredient == "water": 
             #comparo la cantidad de agua actual dentro de la maquina, con la que necesitamos para preparar el espreso
             if resources[ingredient]>MENU[user_order]["ingredients"]["water"]:
-                print("enough water")
+                
+                #si hay suficientes ingredientes le pedimos al usuario que ingrese las monedas para pagar
+                insert_coins()
+                print(insert_coins())
+                
+
                 
             else:
                 print(f"sorry there is not enough {ingredient}")
@@ -35,8 +40,9 @@ def check_resources(user_order):
             #comparo la cantidad de leche actual dentro de la maquina, con la que necesitamos para preparar el espreso
             if resources[ingredient]>MENU[user_order]["ingredients"]["coffee"]:
                 
-                print("enough coffee")
-            
+                #si hay suficientes ingredientes le pedimos al usuario que ingrese las monedas para pagar
+                insert_coins()
+                
             else:
                 print(f"sorry there is not enough {ingredient}")
         
@@ -46,9 +52,10 @@ def check_resources(user_order):
                 #comparo la cantidad de leche actual dentro de la maquina, con la que necesitamos para preparar el espreso
                 if resources[ingredient]>MENU[user_order]["ingredients"]["milk"]:
                     
-                    print("enough milk")
-                
-                
+                    #si hay suficientes ingredientes le pedimos al usuario que ingrese las monedas para pagar                 
+                    insert_coins()
+                    
+                    
                 else:
                     print(f"sorry there is not enough {ingredient}")      
 
@@ -56,12 +63,22 @@ def check_resources(user_order):
 def insert_coins():
     print("Please insert coins.")
     one_yen=int(input("How many 1 yen coins?"))
+    
     five_yen=int(input("How many 5 yen coins?"))
-    ten_yen=(input("How many 10 yen coins?"))
-    fifty_yen=(input("How many 50 yen coins?"))
-    onehundred_yen=(input("How many 100 yen coins?"))
-    fivehundred_yen=(input("How many 500 yen coins?"))
+    
+    ten_yen=int(input("How many 10 yen coins?"))
+    
+    fifty_yen=int(input("How many 50 yen coins?"))
+    
+    onehundred_yen=int(input("How many 100 yen coins?"))
+    
+    fivehundred_yen=int(input("How many 500 yen coins?"))
+    
     total=one_yen * 1 + five_yen * 5 + ten_yen * 10 + fifty_yen * 50 + onehundred_yen * 100 + fivehundred_yen * 500               
+    
+    print(f"The total value inserted is {total }")
+             
+             
                     
 #variable para encender o apagar la maquina 
 runing_machine=True
