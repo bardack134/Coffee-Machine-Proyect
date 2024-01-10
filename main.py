@@ -1,5 +1,6 @@
 from data import *
 
+from Logos import *
 
 
 
@@ -121,6 +122,7 @@ def update_resources():
         resources["water"]  = resources["water"]- MENU[user_order]["ingredients"]["water"]  
             
         resources["coffee"]  = resources["coffee"]- MENU[user_order]["ingredients"]["coffee"] 
+
                     
 #variable para encender o apagar la maquina 
 runing_machine=True
@@ -161,7 +163,7 @@ while runing_machine==True:
     # TODO: Turn off the Coffee Machine by entering “off” to the prompt.
     elif user_order == "off":
         print("the machine has turned off")
-        runing_machine==False
+        runing_machine=False
 
 
 
