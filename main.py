@@ -27,41 +27,45 @@ def check_resources(user_order):
             #comparo la cantidad de agua actual dentro de la maquina, con la que necesitamos para preparar el espreso
             if resources[ingredient]>MENU[user_order]["ingredients"]["water"]:
                 
-                #si hay suficientes ingredientes le pedimos al usuario que ingrese las monedas para pagar
-                insert_coins()
-                print(insert_coins())
+                #si es correcto esta variable "repare_coffee" sera igual a true y evaluamos  este valor en un condicional para decirle al usuario que ingrese las monedas
+                prepare_coffee=True
                 
 
                 
             else:
                 print(f"sorry there is not enough {ingredient}")
+                
         
         if ingredient == "coffee": 
-            #comparo la cantidad de leche actual dentro de la maquina, con la que necesitamos para preparar el espreso
+            #comparo la cantidad de cafe actual dentro de la maquina, con la que necesitamos para preparar el espreso
             if resources[ingredient]>MENU[user_order]["ingredients"]["coffee"]:
                 
-                #si hay suficientes ingredientes le pedimos al usuario que ingrese las monedas para pagar
-                insert_coins()
+                prepare_coffee=True
                 
             else:
                 print(f"sorry there is not enough {ingredient}")
-        
+                
+        #espreso es el unio caffe que no utiliza leche por eso usamos este condicional para verificar el caffe actual es o o no espresso, si es espresso no entrara en el condicional        
         if user_order!="espresso":     
                
             if ingredient == "milk": 
                 #comparo la cantidad de leche actual dentro de la maquina, con la que necesitamos para preparar el espreso
                 if resources[ingredient]>MENU[user_order]["ingredients"]["milk"]:
                     
-                    #si hay suficientes ingredientes le pedimos al usuario que ingrese las monedas para pagar                 
-                    insert_coins()
+                    prepare_coffee=True
                     
                     
                 else:
-                    print(f"sorry there is not enough {ingredient}")      
+                    print(f"sorry there is not enough {ingredient}")     
+    
+    return prepare_coffee               
+        
+        
 
 # TODO: If there are sufficient resources to make the drink selected, then the program should prompt the user to insert coins. "PLease insert coins"
-
 def insert_coins():
+    
+    #el usario inserta laas monedas con que va a pagar respectivamente
     print("Please insert coins.")
     one_yen=int(input("How many 1 yen coins?"))
     
@@ -75,11 +79,26 @@ def insert_coins():
     
     fivehundred_yen=int(input("How many 500 yen coins?"))
     
-    total=one_yen * 1 + five_yen * 5 + ten_yen * 10 + fifty_yen * 50 + onehundred_yen * 100 + fivehundred_yen * 500               
+    #calculamos el valor total de dinero insertado por el usuario
+    total=one_yen * 1 + five_yen * 5 + ten_yen * 10 + fifty_yen * 50 + onehundred_yen * 100 + fivehundred_yen * 500          
+    
+    #en nuestro diccionario "resources" actualizamos el valor de "money" que seria igual al precio del caffe
+    resources["money"]  = resources["money"]+ MENU[user_order]["cost"]  
+    
+    print(resources)
     
     # TODO: Calculate the monetary value of the coins inserted1
     print(f"The total value inserted is {total }")
-             
+    
+    if total > MENU[user_order]["cost"]:
+        change_back=total - MENU[user_order]["cost"]  
+        
+        print(f"The cost of the coffee is {MENU[user_order]['cost']} ￥, Here is {change_back}￥ in change. ")
+        print()
+        
+    
+    else:
+        print("Not enough money")
              
                     
 #variable para encender o apagar la maquina 
@@ -99,13 +118,19 @@ while runing_machine==True:
     
        
     elif user_order == "espresso":
-        check_resources(user_order)
+        
+        
+        if check_resources(user_order) == True:
+            insert_coins()  
+            resources["water"]  = resources["money"]+ MENU[user_order]["cost"]  
         
     elif user_order == "latte":
-        check_resources(user_order)
+        if check_resources(user_order) == True:
+            insert_coins()  
         
     elif user_order == "cappuccino":
-        check_resources(user_order)
+        if check_resources(user_order) == True:
+            insert_coins()  
         
             
     
@@ -115,7 +140,11 @@ while runing_machine==True:
 
 
 
-# TODO: When action is completed and the drink is dispensed, the message "What would you like?... " should show again
+
 
 # TODO: Turn off the Coffee Machine by entering “off” to the prompt.
+
+#TODO: agregar al contador de la maquina la cantidad de dinero incertada, el valor de "money" debe actualizarce
+
+#TODO: igualmente debe restarse de los ingredientes de la maquina, los ingredientes que se usaron para preparar el cafe
 
