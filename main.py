@@ -14,7 +14,7 @@ def report():
         print(f"{ingredient}:  {resources[ingredient]}")
   
 
-# TODO When the user ask for a coffee, we need to check if there are enough resources to make the drink      
+# TODO: When the user ask for a coffee, we need to check if there are enough resources to make the drink      
 def check_resources(user_order):
 
     # print(MENU["espresso"])
@@ -59,7 +59,8 @@ def check_resources(user_order):
                 else:
                     print(f"sorry there is not enough {ingredient}")      
 
-# TODO If there are sufficient resources to make the drink selected, then the program should prompt the user to insert coins. "PLease insert coins"
+# TODO: If there are sufficient resources to make the drink selected, then the program should prompt the user to insert coins. "PLease insert coins"
+
 def insert_coins():
     print("Please insert coins.")
     one_yen=int(input("How many 1 yen coins?"))
@@ -76,6 +77,7 @@ def insert_coins():
     
     total=one_yen * 1 + five_yen * 5 + ten_yen * 10 + fifty_yen * 50 + onehundred_yen * 100 + fivehundred_yen * 500               
     
+    # TODO: Calculate the monetary value of the coins inserted1
     print(f"The total value inserted is {total }")
              
              
@@ -111,7 +113,7 @@ while runing_machine==True:
 
 
 
-# TODO Calculate the monetary value of the coins inserted.
+
 
 # TODO: When action is completed and the drink is dispensed, the message "What would you like?... " should show again
 
